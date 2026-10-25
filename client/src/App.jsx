@@ -379,7 +379,6 @@
 // // // //   );
 // // // // }
 
-
 // // // import React, { useState, useEffect } from 'react';
 // // // import { Routes, Route } from 'react-router-dom';
 // // // import Navbar from './components/Navbar';
@@ -506,7 +505,6 @@
 // // //   );
 // // // }
 
-
 // // import React, { useState, useEffect } from 'react';
 // // import { Routes, Route } from 'react-router-dom';
 // // import Navbar from './components/Navbar';
@@ -592,9 +590,9 @@
 // //                 />
 // //               }
 // //             />
-// //             <Route 
-// //               path="/profile" 
-// //               element={<Profile userListings={clothes} currentUser={currentUser} />} 
+// //             <Route
+// //               path="/profile"
+// //               element={<Profile userListings={clothes} currentUser={currentUser} />}
 // //             />
 // //             <Route
 // //               path="/item/:id"
@@ -636,7 +634,6 @@
 // //     </div>
 // //   );
 // // }
-
 
 // import React, { useState, useEffect } from 'react';
 // import { Routes, Route } from 'react-router-dom';
@@ -728,9 +725,9 @@
 //                 />
 //               }
 //             />
-//             <Route 
-//               path="/profile" 
-//               element={<Profile userListings={clothes} currentUser={currentUser} />} 
+//             <Route
+//               path="/profile"
+//               element={<Profile userListings={clothes} currentUser={currentUser} />}
 //             />
 //             <Route
 //               path="/item/:id"
@@ -772,7 +769,6 @@
 //     </div>
 //   );
 // }
-
 
 // import React, { useState, useEffect } from 'react';
 // import { Routes, Route, useLocation } from 'react-router-dom';
@@ -871,9 +867,9 @@
 //                 />
 //               }
 //             />
-//             <Route 
-//               path="/profile" 
-//               element={<Profile userListings={clothes} currentUser={currentUser} />} 
+//             <Route
+//               path="/profile"
+//               element={<Profile userListings={clothes} currentUser={currentUser} />}
 //             />
 //             <Route
 //               path="/item/:id"
@@ -916,20 +912,19 @@
 //   );
 // }
 
-
-import React, { useState, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import AddItemModal from './components/AddItemModal';
-import AuthModal from './components/AuthModal';
-import { fetchListings, createListing } from './services/api';
-import AdminPanel from './pages/AdminPanel';
-import ItemDetail from './pages/ItemDetail';
-import Profile from './pages/Profile';
-import NearbyMap from './pages/NearbyMap';
-import SwapHub from './pages/SwapHub';
-import Home from './pages/Home';
+import React, { useState, useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import AddItemModal from "./components/AddItemModal";
+import AuthModal from "./components/AuthModal";
+import { fetchListings, createListing } from "./services/api";
+import AdminPanel from "./pages/AdminPanel";
+import ItemDetail from "./pages/ItemDetail";
+import Profile from "./pages/Profile";
+import NearbyMap from "./pages/NearbyMap";
+import SwapHub from "./pages/SwapHub";
+import Home from "./pages/Home";
 
 export default function App() {
   const [clothes, setClothes] = useState([]);
@@ -939,12 +934,12 @@ export default function App() {
 
   // Initialize from localStorage or default to null
   const [currentUser, setCurrentUser] = useState(() => {
-    const savedUser = localStorage.getItem('currentUser');
+    const savedUser = localStorage.getItem("currentUser");
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
   const location = useLocation();
-  const isAdminRoute = location.pathname === '/admin';
+  const isAdminRoute = location.pathname === "/admin";
 
   useEffect(() => {
     loadListings();
@@ -956,7 +951,7 @@ export default function App() {
       const data = await fetchListings();
       setClothes(Array.isArray(data) ? data : []);
     } catch (err) {
-      console.error('API Error:', err);
+      console.error("API Error:", err);
       setClothes([]);
     } finally {
       setLoading(false);
@@ -967,12 +962,12 @@ export default function App() {
     try {
       setLoading(true);
       const createdItem = await createListing(newItemData);
-      console.log('Successfully created item:', createdItem);
+      console.log("Successfully created item:", createdItem);
       setClothes((prev) => [createdItem, ...prev]);
       setShowAddModal(false);
-      alert('Listing created successfully!');
+      alert("Listing created successfully!");
     } catch (err) {
-      console.error('Error adding item:', err);
+      console.error("Error adding item:", err);
       alert(`Error creating listing: ${err.message}`);
     } finally {
       setLoading(false);
@@ -987,13 +982,13 @@ export default function App() {
 
   const handleLoginSuccess = (user) => {
     setCurrentUser(user);
-    localStorage.setItem('currentUser', JSON.stringify(user));
+    localStorage.setItem("currentUser", JSON.stringify(user));
     setShowAuthModal(false);
   };
 
   const handleLogout = () => {
     setCurrentUser(null);
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem("currentUser");
   };
 
   return (
@@ -1031,9 +1026,11 @@ export default function App() {
                 />
               }
             />
-            <Route 
-              path="/profile" 
-              element={<Profile userListings={clothes} currentUser={currentUser} />} 
+            <Route
+              path="/profile"
+              element={
+                <Profile userListings={clothes} currentUser={currentUser} />
+              }
             />
             <Route
               path="/item/:id"
@@ -1063,6 +1060,7 @@ export default function App() {
         <AddItemModal
           onClose={() => setShowAddModal(false)}
           onItemAdded={handleAddItem}
+          currentUser={currentUser}
         />
       )}
 

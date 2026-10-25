@@ -963,15 +963,6 @@ export default function App() {
     }
   };
 
-  // const handleAddItem = async (newItemData) => {
-  //   try {
-  //     const createdItem = await createListing(newItemData);
-  //     setClothes((prev) => [createdItem, ...prev]);
-  //     setShowAddModal(false);
-  //   } catch (err) {
-  //     console.error('Error adding item:', err);
-  //   }
-  // };
   const handleAddItem = async (newItemData) => {
     try {
       setLoading(true);
